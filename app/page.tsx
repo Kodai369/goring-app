@@ -30,7 +30,7 @@ const prompts = [
   }
 ];
 
-async function fetchGPTResponse(input, label) {
+async function fetchGPTResponse(input: string, label: string): Promise<string> {
   const systemPrompt = `
     あなたは「五輪バランシング」GPTです。
     以下の文脈を土台に、問いに応じた精神的内省・象徴的問い返し・構造的理解を促してください。
@@ -64,11 +64,11 @@ async function fetchGPTResponse(input, label) {
 
 export default function AlignmentApp() {
   const [step, setStep] = useState(0);
-  const [responses, setResponses] = useState(Array(prompts.length).fill(""));
-  const [gptReplies, setGptReplies] = useState(Array(prompts.length).fill(""));
+  const [responses, setResponses] = useState<string[]>(Array(prompts.length).fill(""));
+  const [gptReplies, setGptReplies] = useState<string[]>(Array(prompts.length).fill(""));
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newResponses = [...responses];
     newResponses[step] = e.target.value;
     setResponses(newResponses);
