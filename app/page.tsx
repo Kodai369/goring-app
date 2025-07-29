@@ -34,9 +34,21 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 p-4">
-      <h1 className="text-2xl font-bold text-center mb-6">五輪アライメント</h1>
+    <div className="min-h-screen bg-gray-50">
+      {/* メインメニュー */}
+      <nav className="bg-white shadow mb-6">
+  <div className="flex flex-wrap justify-center gap-4 p-4">
+    <a href="/" className="bg-green-700 text-white px-4 py-2 rounded-xl shadow hover:bg-green-800 text-sm font-semibold">五輪アライメント</a>
+    <a href="/free-talk" className="bg-green-700 text-white px-4 py-2 rounded-xl shadow hover:bg-green-800 text-sm font-semibold">フリートーク</a>
+    <a href="/himori" className="bg-green-700 text-white px-4 py-2 rounded-xl shadow hover:bg-green-800 text-sm font-semibold">ヒモリについて</a>
+    <a href="/policy" className="bg-green-700 text-white px-4 py-2 rounded-xl shadow hover:bg-green-800 text-sm font-semibold">ポリシー</a>
+  </div>
+</nav>
+
+
+      {/* コンテンツ */}
       <div className="max-w-2xl mx-auto bg-white rounded shadow p-4">
+        <h1 className="text-2xl font-bold text-center mb-6">五輪アライメント</h1>
         <div className="space-y-4 mb-4 max-h-[50vh] overflow-y-auto">
           {messages.map((msg, i) => (
             <div key={i} className="bg-gray-100 rounded p-3">
