@@ -1,13 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import Header from '@/components/Header'; // このHeaderはあなたが提示したものでOK
+import Link from 'next/link';
 
 type Message = {
   role: 'user' | 'assistant';
   content: string;
 };
 
-export default function Home() {
+export default function AlignPage() {
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([]);
   const [loading, setLoading] = useState(false);
@@ -17,7 +19,7 @@ export default function Home() {
     if (!input.trim()) return;
 
     const userMessage: Message = { role: 'user', content: input };
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     setInput('');
     setLoading(true);
 
@@ -29,23 +31,22 @@ export default function Home() {
 
     const data = await res.json();
     const assistantMessage: Message = { role: 'assistant', content: data.reply.content };
-    setMessages(prev => [...prev, assistantMessage]);
+    setMessages((prev) => [...prev, assistantMessage]);
     setLoading(false);
   };
 
   return (
     <div className="min-h-screen bg-white text-black">
-      {/* メインメニュー */}
-      <nav className="bg-white border-b border-gray-300 mb-6">
-        <div className="flex flex-wrap justify-center gap-4 p-4">
-          <a href="/" className="bg-white text-black border border-black px-4 py-2 rounded hover:bg-black hover:text-white text-sm font-semibold">五輪アライメント</a>
-          <a href="/free-talk" className="bg-white text-black border border-black px-4 py-2 rounded hover:bg-black hover:text-white text-sm font-semibold">フリートーク</a>
-          <a href="/himori" className="bg-white text-black border border-black px-4 py-2 rounded hover:bg-black hover:text-white text-sm font-semibold">ヒモリについて</a>
-          <a href="/policy" className="bg-white text-black border border-black px-4 py-2 rounded hover:bg-black hover:text-white text-sm font-semibold">ポリシー</a>
-        </div>
-      </nav>
+      <Header />
 
-      {/* コンテンツ */}
+      {/* メニューボタン（直接記述） */}
+      <div className="flex flex-wrap justify-center gap-4 p-4">
+        <Link href="/align" className="bg-black text-white px-4 py-2 rounded border border-black text-sm font-semibold">五輪アライメント</Link>
+        <Link href="/free" className="bg-white text-black px-4 py-2 rounded border border-black text-sm font-semibold hover:bg-black hover:text-white">フリートーク</Link>
+        <Link href="/himori" className="bg-white text-black px-4 py-2 rounded border border-black text-sm font-semibold hover:bg-black hover:text-white">ヒモリについて</Link>
+        <Link href="/privacy" className="bg-white text-black px-4 py-2 rounded border border-black text-sm font-semibold hover:bg-black hover:text-white">ポリシー</Link>
+      </div>
+
       <div className="max-w-2xl mx-auto bg-white border border-gray-300 rounded shadow p-4">
         <h1 className="text-2xl font-bold text-center mb-6">五輪アライメント</h1>
         <div className="space-y-4 mb-4 max-h-[50vh] overflow-y-auto">
