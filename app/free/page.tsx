@@ -38,10 +38,7 @@ export default function FreeTalk() {
       {/* メインメニュー */}
       <nav className="bg-white border-b border-gray-300 mb-6">
         <div className="flex flex-wrap justify-center gap-4 p-4">
-          <a href="/" className="bg-white text-black border border-black px-4 py-2 rounded hover:bg-black hover:text-white text-sm font-semibold">五輪アライメント</a>
-          <a href="/free-talk" className="bg-black text-white px-4 py-2 rounded border border-black text-sm font-semibold">フリートーク</a>
-          <a href="/himori" className="bg-white text-black border border-black px-4 py-2 rounded hover:bg-black hover:text-white text-sm font-semibold">ヒモリについて</a>
-          <a href="/policy" className="bg-white text-black border border-black px-4 py-2 rounded hover:bg-black hover:text-white text-sm font-semibold">ポリシー</a>
+
         </div>
       </nav>
 
@@ -52,7 +49,7 @@ export default function FreeTalk() {
           {messages.map((msg, i) => (
             <div key={i} className="border border-gray-300 rounded p-3 bg-white">
               <div className="text-xs font-semibold text-gray-700 mb-1">
-                {msg.role === 'user' ? 'あなた' : 'フリートークAI'}
+                {msg.role === 'user' ? 'あなた' : '五輪アライメント'}
               </div>
               <div className="whitespace-pre-wrap text-black">{msg.content}</div>
             </div>

@@ -1,81 +1,27 @@
 'use client';
 
-import { useState } from 'react';
-import Header from '@/components/Header'; // このHeaderはあなたが提示したものでOK
 import Link from 'next/link';
 
-type Message = {
-  role: 'user' | 'assistant';
-  content: string;
-};
-
-export default function AlignPage() {
-  const [input, setInput] = useState('');
-  const [messages, setMessages] = useState<Message[]>([]);
-  const [loading, setLoading] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim()) return;
-
-    const userMessage: Message = { role: 'user', content: input };
-    setMessages((prev) => [...prev, userMessage]);
-    setInput('');
-    setLoading(true);
-
-    const res = await fetch('/api/chat', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ input }),
-    });
-
-    const data = await res.json();
-    const assistantMessage: Message = { role: 'assistant', content: data.reply.content };
-    setMessages((prev) => [...prev, assistantMessage]);
-    setLoading(false);
-  };
+export default function Home() {
+  const menus = [
+    { name: '五輪アライメント', href: '/align', description: 'あなたの内的五輪のバランスを整える対話' },
+    { name: 'フリートーク', href: '/free', description: '自由な対話を通じて気づきを得る場' },
+    { name: 'ヒモリについて', href: '/himori', description: 'このプロジェクトの背景と哲学' },
+    { name: 'ポリシー', href: '/privacy', description: '運営方針とプライバシーポリシー' },
+  ];
 
   return (
-    <div className="min-h-screen bg-white text-black">
-      <Header />
-
-      {/* メニューボタン（直接記述） */}
-      <div className="flex flex-wrap justify-center gap-4 p-4">
-        <Link href="/align" className="bg-black text-white px-4 py-2 rounded border border-black text-sm font-semibold">五輪アライメント</Link>
-        <Link href="/free" className="bg-white text-black px-4 py-2 rounded border border-black text-sm font-semibold hover:bg-black hover:text-white">フリートーク</Link>
-        <Link href="/himori" className="bg-white text-black px-4 py-2 rounded border border-black text-sm font-semibold hover:bg-black hover:text-white">ヒモリについて</Link>
-        <Link href="/privacy" className="bg-white text-black px-4 py-2 rounded border border-black text-sm font-semibold hover:bg-black hover:text-white">ポリシー</Link>
-      </div>
-
-      <div className="max-w-2xl mx-auto bg-white border border-gray-300 rounded shadow p-4">
-        <h1 className="text-2xl font-bold text-center mb-6">五輪アライメント</h1>
-        <div className="space-y-4 mb-4 max-h-[50vh] overflow-y-auto">
-          {messages.map((msg, i) => (
-            <div key={i} className="border border-gray-300 rounded p-3 bg-white">
-              <div className="text-xs font-semibold text-gray-700 mb-1">
-                {msg.role === 'user' ? 'あなた' : '五輪アライメント'}
-              </div>
-              <div className="whitespace-pre-wrap text-black">{msg.content}</div>
+    <div className="min-h-screen bg-white text-black px-4 py-8">
+      <h1 className="text-2xl font-bold text-center mb-8">五輪アライメントへようこそ</h1>
+      <div className="grid gap-6 max-w-md mx-auto">
+        {menus.map((menu) => (
+          <Link key={menu.href} href={menu.href}>
+            <div className="border border-black rounded-2xl p-6 hover:bg-black hover:text-white transition">
+              <h2 className="text-lg font-semibold mb-2">{menu.name}</h2>
+              <p className="text-sm">{menu.description}</p>
             </div>
-          ))}
-          {loading && <div className="text-gray-500 italic">応答中…</div>}
-        </div>
-        <form onSubmit={handleSubmit} className="flex gap-2">
-          <input
-            type="text"
-            value={input}
-            onChange={(e) => setInput(e.target.value)}
-            className="flex-1 border border-black rounded px-3 py-2"
-            placeholder="問いかけを入力..."
-          />
-          <button
-            type="submit"
-            className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
-            disabled={loading}
-          >
-            送信
-          </button>
-        </form>
+          </Link>
+        ))}
       </div>
     </div>
   );

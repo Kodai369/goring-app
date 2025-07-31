@@ -12,7 +12,7 @@ const prompts = [
 
 async function fetchGPTResponse(input: string, label: string): Promise<string> {
   const systemPrompt = `
-    あなたは「五輪バランシング」GPTです。
+    あなたは「五輪アライメント」GPTです。
     以下の文脈を土台に、問いに応じた精神的内省・象徴的問い返し・構造的理解を促してください。
     【思想土台】
     - 天風哲学・禅・修養・武士道・自己コーチングを用いた、思考バランスの顕在化
@@ -70,7 +70,7 @@ export default function Home() {
   return (
     <div className="max-w-xl mx-auto p-4 font-sans text-black bg-white">
       <div className="p-8 text-center">
-        <h1 className="text-2xl font-bold">ようこそ 五輪バランシングアプリへ</h1>
+        <h1 className="text-2xl font-bold">ようこそ 五輪アライメントへ</h1>
         <p className="mt-4">こちらは現在開発中のアプリです。</p>
       </div>
       {step < prompts.length ? (

@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "五輪バランシング",
+  title: "五輪アライメント",
   description: "五輪思想をもとにした自己調整アプリ",
 };
 
